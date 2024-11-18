@@ -11,13 +11,7 @@ const dietaryForm: React.FC = () => {
   const [age, setAge] = useState<{ years: number; months: number } | null>(
     null
   );
-  const isLessThanOneDay = (birthDate: string): boolean => {
-    const birth = new Date(birthDate);
-    const now = new Date();
-    const diffInMilliseconds = now.getTime() - birth.getTime();
-    const diffInHours = diffInMilliseconds / (1000 * 60 * 60); // Menghitung selisih dalam jam
-    return diffInHours < 24; // Jika selisih kurang dari 24 jam
-  };
+
   const calculateAge = (
     dateString: string
   ): { years: number; months: number } => {
@@ -57,17 +51,7 @@ const dietaryForm: React.FC = () => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
-    if (isLessThanOneDay(birthDate)) {
-      alert("Tanggal lahir kurang dari 1x24 jam, mohon periksa kembali!");
-      // Menambahkan class untuk memberi highlight pada field tertentu (misalnya border merah)
-      document.getElementById("tanggal_lahir")?.classList.add("border-red-500");
-      return; // Tidak lanjutkan proses submit
-    } else {
-      // Hapus border merah jika valid
-      document
-        .getElementById("tanggal_lahir")
-        ?.classList.remove("border-red-500");
-    }
+
     // Tambahkan umur yang dihitung ke dalam formData
     if (age) {
       const umur = `${age.years} tahun ${age.months} bulan`;

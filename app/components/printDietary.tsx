@@ -7,9 +7,8 @@ import { printDietary } from "@/lib/actions";
 import { useFormState } from "react-dom";
 import { formatDate } from "@/lib/utils";
 const printTicket = ({ dietary }: { dietary: Dietary }) => {
-  const [formData, setFormData] = useState<any>(null);
-  const updateDietaryWithid = printDietary.bind(null, dietary.id);
-  const [state, formAction] = useFormState(updateDietaryWithid, null);
+  const printDietaryWithid = printDietary.bind(null, dietary.id);
+  const [state, formAction] = useFormState(printDietaryWithid, null);
   const [birthDate, setBirthDate] = useState<string>("");
   const [age, setAge] = useState<{ years: number; months: number } | null>(
     null

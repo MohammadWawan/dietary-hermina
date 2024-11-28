@@ -199,6 +199,25 @@ const dietaryForm: React.FC = () => {
             <p className="mt-2 text-sm text-red-500">{state?.Error?.perawat}</p>
           </div>
         </div>
+        <div className="mb-6">
+          <label
+            htmlFor="ruangan"
+            className="block mb-2 text-sm font-semibold text-gray-900 dark:text-white"
+          >
+            Ruangan
+          </label>
+          <input
+            type="text"
+            id="ruangan"
+            name="ruangan"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="nomor ruangan"
+            required
+          />
+          <div id="name-error" aria-live="polite" aria-atomic="true">
+            <p className="mt-2 text-sm text-red-500">{state?.Error?.ruangan}</p>
+          </div>
+        </div>
 
         <div className="mb-6">
           <label

@@ -1,5 +1,5 @@
 import { prisma } from "../lib/prisma";
-
+import { NextApiRequest, NextApiResponse } from "next";
 const ITEMS_PER_PAGE = 5;
 
 export const getDietarys = async (query: string, currentPage: number) => {
@@ -15,6 +15,7 @@ export const getDietarys = async (query: string, currentPage: number) => {
           { diet: { contains: query, mode: "insensitive" } },
           { dpjp: { contains: query, mode: "insensitive" } },
           { perawat: { contains: query, mode: "insensitive" } },
+
           { keterangan: { contains: query, mode: "insensitive" } },
         ],
       },

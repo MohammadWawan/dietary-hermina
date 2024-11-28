@@ -1,9 +1,7 @@
-import { getDietaryPages } from "@/lib/data";
 import { CreateButton } from "../components/button";
 import NavBar from "../components/navbar";
 import TableDietary from "../components/tableDietary";
 import SearchComponent from "@/app/components/search";
-import Pagination from "../components/pagination";
 
 const dietary = async ({
   searchParams,

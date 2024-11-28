@@ -24,6 +24,7 @@ const dietarySchema = z.object({
     ),
   dpjp: z.string().min(5),
   perawat: z.string().min(5),
+  ruangan: z.string().min(2),
   diet: z.string().min(2),
   keterangan: z.string(),
 });
@@ -52,6 +53,7 @@ export const SaveDietary = async (prevSate: any, formData: FormData) => {
         umur: validatedFields.data.umur,
         dpjp: validatedFields.data.dpjp,
         perawat: validatedFields.data.perawat,
+        ruangan: validatedFields.data.ruangan,
         diet: validatedFields.data.diet,
         keterangan: validatedFields.data.keterangan,
       },
@@ -92,6 +94,7 @@ export const updateDietary = async (
         umur: validatedFields.data.umur,
         dpjp: validatedFields.data.dpjp,
         perawat: validatedFields.data.perawat,
+        ruangan: validatedFields.data.ruangan,
         diet: validatedFields.data.diet,
         keterangan: validatedFields.data.keterangan,
       },
@@ -119,4 +122,46 @@ export const deleteDietary = async (id: string): Promise<void> => {
     console.error("Error deleting dietary:", error);
     throw new Error("Failed to delete dietary"); // Bisa lempar error jika perlu
   }
+};
+
+export const printDietary = async (
+  id: string,
+  prevSate: any,
+  formData: FormData
+) => {
+  const validatedFields = dietarySchema.safeParse(
+    Object.fromEntries(formData.entries())
+  );
+
+  if (!validatedFields.success) {
+    return {
+      Error: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+  const tanggalLahir = new Date(validatedFields.data.tanggal_lahir);
+
+  if (isNaN(tanggalLahir.getTime())) {
+    return { message: "Tanggal lahir tidak valid" };
+  }
+  try {
+    await prisma.dietary.update({
+      data: {
+        mrn: validatedFields.data.mrn,
+        nama: validatedFields.data.nama,
+        tanggal_lahir: tanggalLahir,
+        umur: validatedFields.data.umur,
+        dpjp: validatedFields.data.dpjp,
+        perawat: validatedFields.data.perawat,
+        ruangan: validatedFields.data.ruangan,
+        diet: validatedFields.data.diet,
+        keterangan: validatedFields.data.keterangan,
+      },
+      where: { id },
+    });
+  } catch (error) {
+    return { message: "Failed to print dietary" };
+  }
+
+  revalidatePath("/print");
+  redirect("/print");
 };

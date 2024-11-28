@@ -33,6 +33,7 @@ const tableDietary = async ({
               <th className="py-3 px-6 text-center">Usia</th>
               <th className="py-3 px-6 text-center">Nama DPJP</th>
               <th className="py-3 px-6 text-center">Nama Perawat</th>
+              <th className="py-3 px-6 text-center">Ruangan</th>
               <th className="py-3 px-6 text-center">Diet</th>
               <th className="py-3 px-6 text-center">Keterangan</th>
               <th className="py-3 px-6 text-center">Actions</th>
@@ -48,7 +49,7 @@ const tableDietary = async ({
                 <tr
                   key={dietary.id}
                   className={`bg-white border-b ${
-                    isRecentlyUpdated ? "bg-red-100" : ""
+                    isRecentlyUpdated ? "bg-green-200" : ""
                   }`}
                 >
                   <td className="py-3 px-6 text-center">{index + 1}</td>
@@ -60,6 +61,7 @@ const tableDietary = async ({
                   <td className="py-3 px-6 text-center">{dietary.umur}</td>
                   <td className="py-3 px-6 text-center">{dietary.dpjp}</td>
                   <td className="py-3 px-6 text-center">{dietary.perawat}</td>
+                  <th className="py-3 px-6 text-center">{dietary.ruangan}</th>
                   <td className="py-3 px-6 text-center">{dietary.diet}</td>
                   <td className="py-3 px-6 text-center">
                     {dietary.keterangan}
@@ -67,7 +69,7 @@ const tableDietary = async ({
                   <td className="flex justify-center gap-1 py-5">
                     <EditDietary id={dietary.id} />
                     <DeleteDietary id={dietary.id} />
-                    <PrintDietary />
+                    <PrintDietary id={dietary.id} />
                   </td>
                 </tr>
               );
@@ -75,10 +77,8 @@ const tableDietary = async ({
           </tbody>
         </table>
         <div className="flex flex-row gap-2 p-3 mt-3 ">
-          <div className="bg-red-200 text-black text-center px-3 py-1 rounded border-2 border-black"></div>
+          <div className="bg-green-200 text-black text-center px-3 py-1 rounded border-2 border-black"></div>
           <div>Pasien Baru</div>
-          <div className="bg-slate-100 text-black text-center px-3 py-1 rounded border-2 border-black"></div>
-          <div>Pasien Lama</div>
         </div>
         <div className="flex justify-center mt-4">
           <Pagination totalPages={totalPages} />

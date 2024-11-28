@@ -12,6 +12,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      spacing: {
+        "10cm": "10cm",
+        "3cm": "3cm",
+      },
     },
   },
   plugins: [],

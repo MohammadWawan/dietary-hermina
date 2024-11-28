@@ -50,14 +50,17 @@ export const DeleteDietary = ({ id }: { id: string }) => {
     </form>
   );
 };
-export const PrintDietary = () => {
+
+export const PrintDietary = ({ id }: { id: string }) => {
   return (
-    <Link
-      href="/dietary/dietaryForm"
-      className="inline-flex items-center focus:outline-none text-white bg-cyan-600 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-3 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
-    >
-      <MdPrint size={20} />
-    </Link>
+    <button>
+      <Link
+        href={`/dietary/printDietary/${id}`}
+        className="inline-flex items-center focus:outline-none text-white bg-cyan-600 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-3 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
+      >
+        <MdPrint size={20} />
+      </Link>
+    </button>
   );
 };
 

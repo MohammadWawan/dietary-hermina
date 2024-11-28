@@ -7,6 +7,7 @@ CREATE TABLE "Dietary" (
     "umur" TEXT NOT NULL,
     "dpjp" TEXT NOT NULL,
     "perawat" TEXT NOT NULL,
+    "ruangan" TEXT NOT NULL,
     "diet" TEXT NOT NULL,
     "keterangan" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

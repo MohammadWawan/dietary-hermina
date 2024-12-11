@@ -1,5 +1,5 @@
 import { prisma } from "../lib/prisma";
-import { NextApiRequest, NextApiResponse } from "next";
+
 const ITEMS_PER_PAGE = 5;
 
 export const getDietarys = async (query: string, currentPage: number) => {
@@ -56,6 +56,31 @@ export const getDietaryPages = async (query: string) => {
     const totalPages = Math.ceil(Number(dietarys) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
+    throw new Error("Failed to fetch dietary data");
+  }
+};
+
+export const getReportCountDietarys = async () => {
+  try {
+    // Hitung jumlah total pasien
+    const response = await prisma.dietary.count();
+
+    const totalPatient = Math.abs(Number(response));
+    return { totalPatient };
+  } catch (error) {
+    console.error("Error in Prisma query:", error);
+    throw new Error("Failed to fetch dietary data");
+  }
+};
+
+export const getReportDataDietarys = async () => {
+  try {
+    // Ambil semua data pasien
+    const response = await prisma.dietary.findMany();
+
+    return response;
+  } catch (error) {
+    console.error("Error in Prisma query:", error);
     throw new Error("Failed to fetch dietary data");
   }
 };

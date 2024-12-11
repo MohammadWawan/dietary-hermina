@@ -9,7 +9,7 @@ import { IoCloseSharp } from "react-icons/io5";
 function navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="bg-white py-5 sticky top-0 border-b justify-between border-gray-100">
+    <nav className="bg-white py-5 sticky top-0 border-b justify-between px-10 border-gray-100">
       <div className="container lg:px-12 flex items-center justify-between">
         <div className="text-black text-2xl font-bold flex items-center">
           <Link href="/" className="flex items-center">

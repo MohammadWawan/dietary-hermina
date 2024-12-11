@@ -15,9 +15,9 @@ const dietary = async ({
   const currentPage = Number(searchParams?.page) || 1;
 
   return (
-    <section className="md:h-screen bg-slate-100">
+    <section className="md:h-screen w-full bg-slate-100">
       <NavBar />
-      <div className="flex content-end pt-10 m-2 px-16 w-full">
+      <div className="flex content-end pt-10 m-2 px-16">
         <CreateButton />
         <SearchComponent />
       </div>

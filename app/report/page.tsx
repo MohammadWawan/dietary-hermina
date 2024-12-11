@@ -1,6 +1,19 @@
-import NavBar from "../components/navbar";
+"use client";
 
-export default function report() {
+import NavBar from "../components/navbar";
+import { exportToExcel } from "@/lib/actions";
+import { MdPrint } from "react-icons/md";
+import { getReportCountDietarys, getReportDataDietarys } from "@/lib/data";
+
+const Report = async () => {
+  const resultData = await getReportDataDietarys(); // Panggil fungsi API
+  const resultCountData = await getReportCountDietarys();
+
+  const handleExport = () => {
+    console.log(resultData);
+    exportToExcel(resultData, "Laporan_Dietary.xlsx");
+  };
+
   return (
     <div>
       <NavBar />
@@ -10,9 +23,18 @@ export default function report() {
             Laporan Dietary
           </h1>
           <div className="bg-white shadow-md rounded-lg p-6 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Ringkasan
-            </h2>
+            <div className="justify-between flex flex-row md:flex-wrap">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                Ringkasan
+              </h2>
+              <button
+                onClick={handleExport}
+                className="inline-flex items-center gap-2 focus:outline-none text-white bg-cyan-600 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-8 py-1.5 me-2 mb-3 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
+              >
+                Print Report
+                <MdPrint size={20} />
+              </button>
+            </div>
             <p className="text-gray-600 mb-4">
               Berikut adalah ringkasan laporan dietary pasien. Anda dapat
               melihat detail lebih lanjut di bawah.
@@ -20,63 +42,14 @@ export default function report() {
             <div className="flex flex-wrap justify-between">
               <div className="flex-1">
                 <h3 className="font-bold text-lg">Total Pasien:</h3>
-                <p className="text-gray-600">50</p>
-              </div>
-              <div className="flex-1">
-                <h3 className="font-bold text-lg">Diet Tersedia:</h3>
-                <p className="text-gray-600">Vegan, Vegetarian, Ketogenic</p>
-              </div>
-              <div className="flex-1">
-                <h3 className="font-bold text-lg">Rata-rata Umur:</h3>
-                <p className="text-gray-600">30 tahun</p>
+                <p className="text-gray-600">{resultCountData.totalPatient}</p>
               </div>
             </div>
-          </div>
-
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Detail Pasien
-            </h2>
-            <table className="min-w-full bg-white border border-gray-300 rounded-lg">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="py-3 px-4 text-left text-gray-600 font-semibold">
-                    Nama Pasien
-                  </th>
-                  <th className="py-3 px-4 text-left text-gray-600 font-semibold">
-                    Tanggal Lahir
-                  </th>
-                  <th className="py-3 px-4 text-left text-gray-600 font-semibold">
-                    Diet
-                  </th>
-                  <th className="py-3 px-4 text-left text-gray-600 font-semibold">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b">
-                  <td className="py-2 px-4">John Doe</td>
-                  <td className="py-2 px-4">01/01/1990</td>
-                  <td className="py-2 px-4">Vegan</td>
-                  <td className="py-2 px-4 text-green-600 font-semibold">
-                    Sehat
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-2 px-4">Jane Smith</td>
-                  <td className="py-2 px-4">05/03/1985</td>
-                  <td className="py-2 px-4">Ketogenic</td>
-                  <td className="py-2 px-4 text-red-600 font-semibold">
-                    Perlu Perhatian
-                  </td>
-                </tr>
-                {/* Tambahkan lebih banyak baris sesuai kebutuhan */}
-              </tbody>
-            </table>
           </div>
         </div>
       </section>
     </div>
   );
-}
+};
+
+export default Report;

@@ -3,12 +3,9 @@
 import { ReactBarcode } from "react-jsbarcode";
 import type { Dietary } from "@prisma/client";
 import { useEffect, useState } from "react";
-import { printDietary } from "@/lib/actions";
-import { useFormState } from "react-dom";
+
 import { formatDate } from "@/lib/utils";
 const printTicket = ({ dietary }: { dietary: Dietary }) => {
-  const printDietaryWithid = printDietary.bind(null, dietary.id);
-  const [state, formAction] = useFormState(printDietaryWithid, null);
   const [birthDate, setBirthDate] = useState<string>("");
   const [age, setAge] = useState<{ years: number; months: number } | null>(
     null
@@ -57,30 +54,6 @@ const printTicket = ({ dietary }: { dietary: Dietary }) => {
     fetchData();
   }, [dietary.id]); // Run the effect when the dietary id changes
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setBirthDate(value);
-    if (value) {
-      const { years, months } = calculateAge(value);
-      setAge({ years, months });
-    } else {
-      setAge(null);
-    }
-  };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target as HTMLFormElement);
-
-    // Ensure 'umur' is formatted as "X tahun Y bulan"
-    if (age) {
-      const umur = `${age.years} tahun ${age.months} bulan`; // Properly formatted string
-      formData.append("umur", umur);
-    }
-
-    // Send form data to the backend
-    formAction(formData);
-  };
   return (
     <div
       className="ticket-container bg-gray-100"
@@ -92,10 +65,8 @@ const printTicket = ({ dietary }: { dietary: Dietary }) => {
             {dietary.nama}
             <span className="text-xs text-gray-500">
               {" "}
-              {formatDate(dietary.tanggal_lahir.toString())}
+              {formatDate(dietary.tanggal_lahir.toString())} | {dietary.umur}
             </span>
-
-            <span className="text-xs text-gray-500"> | {dietary.umur}</span>
           </div>
           <div className="text-xs text-gray-500">{dietary.mrn}</div>
         </div>

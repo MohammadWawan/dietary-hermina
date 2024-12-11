@@ -48,8 +48,8 @@ const tableDietary = async ({
               return (
                 <tr
                   key={dietary.id}
-                  className={`bg-white border-b ${
-                    isRecentlyUpdated ? "bg-green-200" : ""
+                  className={`bg-white border-b   ${
+                    isRecentlyUpdated ? "bg-red-200" : ""
                   }`}
                 >
                   <td className="py-3 px-6 text-center">{index + 1}</td>
@@ -77,7 +77,7 @@ const tableDietary = async ({
           </tbody>
         </table>
         <div className="flex flex-row gap-2 p-3 mt-3 ">
-          <div className="bg-green-200 text-black text-center px-3 py-1 rounded border-2 border-black"></div>
+          <div className="bg-red-100 text-black text-center px-3 py-1 rounded border-2 border-black"></div>
           <div>Pasien Baru</div>
         </div>
         <div className="flex justify-center mt-4">

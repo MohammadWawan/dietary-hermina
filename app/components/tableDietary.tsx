@@ -20,6 +20,7 @@ const tableDietary = async ({
 }) => {
   const dietarys = await getDietarys(query, currentPage);
   const totalPages = await getDietaryPages(query);
+
   return (
     <div className="bg-slate-100 px-10 md:h-screen">
       <div className="pt-5 block m-4 p-4 w-full overflow-x-auto ">

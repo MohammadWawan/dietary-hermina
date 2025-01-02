@@ -1,19 +1,14 @@
-"use client";
-
 import NavBar from "../components/navbar";
-import { exportToExcel } from "@/lib/actions";
+
 import { MdPrint } from "react-icons/md";
-import { getReportCountDietarys, getReportDataDietarys } from "@/lib/data";
+import { getReportCountDietarys } from "@/lib/data";
 
 const Report = async () => {
-  const resultData = await getReportDataDietarys(); // Panggil fungsi API
+  // Panggil fungsi API
   const resultCountData = await getReportCountDietarys();
-
-  const handleExport = () => {
-    console.log(resultData);
-    exportToExcel(resultData, "Laporan_Dietary.xlsx");
-  };
-
+  // const handleExport = () => {
+  //   console.log(resultData);
+  // };
   return (
     <div>
       <NavBar />
@@ -28,7 +23,7 @@ const Report = async () => {
                 Ringkasan
               </h2>
               <button
-                onClick={handleExport}
+                // onClick={handleExport}
                 className="inline-flex items-center gap-2 focus:outline-none text-white bg-cyan-600 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-8 py-1.5 me-2 mb-3 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
               >
                 Print Report

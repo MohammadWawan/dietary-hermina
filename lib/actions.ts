@@ -3,7 +3,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import * as XLSX from "xlsx";
+
 const dietarySchema = z.object({
   mrn: z.string().min(10),
   nama: z.string().min(6),
@@ -165,16 +165,4 @@ export const printDietary = async (
 
   revalidatePath("/print");
   redirect("/print");
-};
-
-export const exportToExcel = (data: any, fileName = "report.xlsx") => {
-  // Convert JSON data to worksheet
-  const worksheet = XLSX.utils.json_to_sheet(data);
-
-  // Create a workbook and add the worksheet
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-
-  // Write the workbook to a file
-  XLSX.writeFile(workbook, fileName);
 };

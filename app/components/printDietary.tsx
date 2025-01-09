@@ -55,33 +55,37 @@ const printTicket = ({ dietary }: { dietary: Dietary }) => {
   }, [dietary.id]); // Run the effect when the dietary id changes
 
   return (
-    <div
-      className="ticket-container bg-gray-100"
-      style={{ width: "10cm", height: "3cm" }}
-    >
-      <div className="bg-white border border-gray-300 rounded-lg shadow-md p-2">
-        <div className="gap-2 justify-between grid-cols-2 p-2 mx-2 flex">
-          <div className="text-xl font-semibold">
-            {dietary.nama}
-            <span className="text-xs text-gray-500">
-              {" "}
-              {formatDate(dietary.tanggal_lahir.toString())} | {dietary.umur}
-            </span>
+    <div className="container">
+      <div
+        className="ticket-container bg-gray-100"
+        style={{ width: "12cm", height: "3cm" }}
+      >
+        <div className="bg-white border border-gray-300 rounded-lg shadow-md p-2">
+          <div className="gap-2 justify-between grid-cols-2 p-2 mx-2 flex">
+            <div className="text-xl font-semibold truncate ">
+              {dietary.nama}
+              <p className="text-xs text-gray-500">
+                {formatDate(dietary.tanggal_lahir.toString())} | {dietary.umur}
+              </p>
+            </div>
+            <div className="text-xs text-gray-500">{dietary.mrn}</div>
           </div>
-          <div className="text-xs text-gray-500">{dietary.mrn}</div>
-        </div>
-        <div className="flex justify-between px-2 mx-2">
-          <div className="text-sm font-medium">
-            <p>{dietary.dpjp}</p> {dietary.perawat}
-            <span className="text-xs text-gray-500"> | {dietary.ruangan} </span>
+          <div className="flex justify-between px-2 mx-2">
+            <div className="text-sm font-medium">
+              <p>{dietary.dpjp}</p> {dietary.perawat}
+              <span className="text-xs text-gray-500">
+                {" "}
+                | {dietary.ruangan}{" "}
+              </span>
+            </div>
+            <div className="text-sm font-medium">
+              {dietary.diet}
+              <p className="text-sm text-gray-500">{dietary.keterangan}</p>
+            </div>
           </div>
-          <div className="text-sm font-medium">
-            {dietary.diet}
-            <p className="text-sm text-gray-500">{dietary.keterangan}</p>
+          <div className="flex justify-center text-center font-light ">
+            <ReactBarcode value={dietary.mrn} className="text-xs  max-h-20 " />
           </div>
-        </div>
-        <div className="flex justify-center text-center font-light ">
-          <ReactBarcode value={dietary.mrn} className="text-xs  max-h-20 " />
         </div>
       </div>
     </div>

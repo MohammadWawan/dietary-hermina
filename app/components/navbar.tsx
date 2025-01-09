@@ -29,9 +29,9 @@ function navbar() {
           <Link href="/dietary" className="link">
             Patient Dietary
           </Link>
-          <Link href="/report" className="link">
+          {/* <Link href="/report" className="link">
             Report
-          </Link>
+          </Link> */}
           <Link href="/about" className="link">
             About
           </Link>
@@ -63,9 +63,9 @@ function navbar() {
           <Link href="/dietary" className="link">
             Patient Dietary
           </Link>
-          <Link href="/report" className="link">
+          {/* <Link href="/report" className="link">
             Report
-          </Link>
+          </Link> */}
           <Link href="/about" className="link">
             About
           </Link>

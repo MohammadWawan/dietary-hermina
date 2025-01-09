@@ -24,13 +24,11 @@ export default function about() {
               Apa yang Kami Tawarkan?
             </h3>
             <ul className="list-disc list-inside text-gray-600">
-              <li>Pengelolaan diet yang mudah dan intuitif.</li>
+              <li>Pengelolaan diet yang mudah dan terstruktur.</li>
               <li>
                 Rekomendasi makanan berdasarkan preferensi dan kebutuhan
                 kesehatan.
               </li>
-              <li>Pelacakan kemajuan kesehatan secara real-time.</li>
-              <li>Komunitas dukungan untuk berbagi pengalaman dan tips.</li>
             </ul>
           </div>
 

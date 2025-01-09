@@ -1,14 +1,21 @@
 import { DeleteDietary, EditDietary, PrintDietary } from "./button";
-import { getDietaryPages, getDietarys } from "@/lib/data";
+import {
+  getDietaryPages,
+  getDietarys,
+  getReportCountDietarys,
+} from "@/lib/data";
 import { formatDate } from "@/lib/utils";
 import Pagination from "./pagination";
 
 const isUpdatedWithin24Hours = (updatedAt: string): boolean => {
-  const updatedDate = new Date(updatedAt); // Convert to Date object
-  const currentDate = new Date(); // Current date and time
-  const diffInMilliseconds = currentDate.getTime() - updatedDate.getTime(); // Time difference in milliseconds
-  const diffInHours = diffInMilliseconds / (1000 * 60 * 60); // Convert to hours
-  return diffInHours < 24; // Return true if less than 24 hours
+  if (!updatedAt) return false;
+
+  const updatedDate = new Date(updatedAt);
+  const currentDate = new Date();
+  const diffInMilliseconds = currentDate.getTime() - updatedDate.getTime();
+  const diffInHours = diffInMilliseconds / (1000 * 60 * 60);
+
+  return diffInHours < 24;
 };
 
 const tableDietary = async ({
@@ -20,6 +27,7 @@ const tableDietary = async ({
 }) => {
   const dietarys = await getDietarys(query, currentPage);
   const totalPages = await getDietaryPages(query);
+  const resultCountData = await getReportCountDietarys();
 
   return (
     <div className="bg-slate-100 px-10 md:h-screen">
@@ -27,7 +35,6 @@ const tableDietary = async ({
         <table className="w-full text-sm text-left text-gray-500">
           <thead className="text-sm text-gray-700 uppercase bg-gray-50">
             <tr>
-              <th className="py-3 px-6 text-center">No</th>
               <th className="py-3 px-6 text-center">MRN</th>
               <th className="py-3 px-6 text-center">Nama Pasien</th>
               <th className="py-3 px-6 text-center">Tanggal Lahir</th>
@@ -49,11 +56,10 @@ const tableDietary = async ({
               return (
                 <tr
                   key={dietary.id}
-                  className={`bg-white border-b   ${
-                    isRecentlyUpdated ? "bg-red-200" : ""
+                  className={`bg-white border-b ${
+                    isRecentlyUpdated ? "bg-red-100" : ""
                   }`}
                 >
-                  <td className="py-3 px-6 text-center">{index + 1}</td>
                   <td className="py-3 px-6 text-center">{dietary.mrn}</td>
                   <td className="py-3 px-6 text-center">{dietary.nama}</td>
                   <td className="py-3 px-6 text-center">
@@ -77,10 +83,19 @@ const tableDietary = async ({
             })}
           </tbody>
         </table>
-        <div className="flex flex-row gap-2 p-3 mt-3 ">
-          <div className="bg-red-100 text-black text-center px-3 py-1 rounded border-2 border-black"></div>
-          <div>Pasien Baru</div>
+        <div className="flex flex-row justify-between gap-2 p-3 mt-3 ">
+          <div className="flex gap-2 justify-between">
+            <div className="bg-red-100 text-black text-center px-3 py-1 rounded border-2 border-black"></div>
+            <div>Pasien Baru / Update Data</div>
+          </div>
+          <div className="">
+            <span className="font-bold text-lg pr-2">Total Pasien :</span>
+            <span className="text-gray-600">
+              {resultCountData.totalPatient}
+            </span>
+          </div>
         </div>
+
         <div className="flex justify-center mt-4">
           <Pagination totalPages={totalPages} />
         </div>

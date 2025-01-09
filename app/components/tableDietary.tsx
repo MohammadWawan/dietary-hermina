@@ -48,7 +48,7 @@ const tableDietary = async ({
             </tr>
           </thead>
           <tbody>
-            {dietarys.map((dietary: any, index: any) => {
+            {dietarys.map((dietary: any) => {
               // Check if the updatedAt is less than 24 hours ago
               const isRecentlyUpdated = isUpdatedWithin24Hours(
                 dietary.updatedAt

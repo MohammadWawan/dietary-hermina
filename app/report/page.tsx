@@ -1,6 +1,5 @@
 import NavBar from "../components/navbar";
 
-import { MdPrint } from "react-icons/md";
 import { getReportCountDietarys } from "@/lib/data";
 
 const Report = async () => {

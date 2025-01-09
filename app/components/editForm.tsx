@@ -8,10 +8,9 @@ import { useFormState } from "react-dom";
 import type { Dietary } from "@prisma/client";
 
 const UpdateDietaryForm = ({ dietary }: { dietary: Dietary }) => {
-  const [formData, setFormData] = useState<any>(null);
   const updateDietaryWithid = updateDietary.bind(null, dietary.id);
   const [state, formAction] = useFormState(updateDietaryWithid, null);
-  const [birthDate, setBirthDate] = useState<string>("");
+  const [birthDate, SetBirthDate] = useState<string>("");
   const [age, setAge] = useState<{ years: number; months: number } | null>(
     null
   );
@@ -46,7 +45,7 @@ const UpdateDietaryForm = ({ dietary }: { dietary: Dietary }) => {
       try {
         const response = await fetch(`/api/dietary/${dietary.id}`);
         const data = await response.json();
-        setBirthDate(data.tanggal_lahir);
+        SetBirthDate(data.tanggal_lahir);
         if (data.tanggal_lahir) {
           const { years, months } = calculateAge(data.tanggal_lahir);
           setAge({ years, months });
@@ -61,7 +60,7 @@ const UpdateDietaryForm = ({ dietary }: { dietary: Dietary }) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setBirthDate(value);
+    SetBirthDate(value);
     if (value) {
       const { years, months } = calculateAge(value);
       setAge({ years, months });

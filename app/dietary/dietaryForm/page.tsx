@@ -5,10 +5,10 @@ import { SaveDietary } from "@/lib/actions";
 import { useState } from "react";
 import { useFormState } from "react-dom";
 
-const dietaryForm: React.FC = () => {
-  const [state, formAction] = useFormState(SaveDietary, null);
-  const [birthDate, setBirthDate] = useState<string>("");
-  const [age, setAge] = useState<{ years: number; months: number } | null>(
+const DietaryForm: React.FC = () => {
+  const [State, FormAction] = useFormState(SaveDietary, null);
+  const [BirthDate, SetBirthDate] = useState<string>("");
+  const [Age, SetAge] = useState<{ years: number; months: number } | null>(
     null
   );
 
@@ -39,12 +39,12 @@ const dietaryForm: React.FC = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setBirthDate(value);
+    SetBirthDate(value);
     if (value) {
       const { years, months } = calculateAge(value);
-      setAge({ years, months });
+      SetAge({ years, months });
     } else {
-      setAge(null);
+      SetAge(null);
     }
   };
   const handleSubmit = (e: React.FormEvent) => {
@@ -53,13 +53,13 @@ const dietaryForm: React.FC = () => {
     const formData = new FormData(e.target as HTMLFormElement);
 
     // Tambahkan umur yang dihitung ke dalam formData
-    if (age) {
-      const umur = `${age.years} tahun ${age.months} bulan`;
+    if (Age) {
+      const umur = `${Age.years} tahun ${Age.months} bulan`;
       formData.append("umur", umur);
     }
 
     // Kirim data form yang sudah ditambahkan umur ke backend
-    formAction(formData);
+    FormAction(formData);
   };
   return (
     <div className="w-full max-w-screen-md mx-auto pt-10 mb-10">
@@ -90,7 +90,7 @@ const dietaryForm: React.FC = () => {
             required
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
-            <p className="mt-2 text-sm text-red-500">{state?.Error?.mrn}</p>
+            <p className="mt-2 text-sm text-red-500">{State?.Error?.mrn}</p>
           </div>
         </div>
 
@@ -110,7 +110,7 @@ const dietaryForm: React.FC = () => {
             required
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
-            <p className="mt-2 text-sm text-red-500">{state?.Error?.nama}</p>
+            <p className="mt-2 text-sm text-red-500">{State?.Error?.nama}</p>
           </div>
         </div>
 
@@ -124,7 +124,7 @@ const dietaryForm: React.FC = () => {
           <input
             type="date"
             id="tanggal_lahir"
-            value={birthDate}
+            value={BirthDate}
             onChange={handleChange}
             name="tanggal_lahir"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -132,7 +132,7 @@ const dietaryForm: React.FC = () => {
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
             <p className="mt-2 text-sm text-red-500">
-              {state?.Error?.tanggal_lahir}
+              {State?.Error?.tanggal_lahir}
             </p>
           </div>
         </div>
@@ -151,12 +151,12 @@ const dietaryForm: React.FC = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="tahun & bulan"
             value={
-              age !== null ? age.years + " Tahun " + age.months + " Bulan" : ""
+              Age !== null ? Age.years + " Tahun " + Age.months + " Bulan" : ""
             }
             readOnly
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
-            <p className="mt-2 text-sm text-red-500">{state?.Error?.umur}</p>
+            <p className="mt-2 text-sm text-red-500">{State?.Error?.umur}</p>
           </div>
         </div>
 
@@ -176,7 +176,7 @@ const dietaryForm: React.FC = () => {
             required
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
-            <p className="mt-2 text-sm text-red-500">{state?.Error?.dpjp}</p>
+            <p className="mt-2 text-sm text-red-500">{State?.Error?.dpjp}</p>
           </div>
         </div>
 
@@ -196,7 +196,7 @@ const dietaryForm: React.FC = () => {
             required
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
-            <p className="mt-2 text-sm text-red-500">{state?.Error?.perawat}</p>
+            <p className="mt-2 text-sm text-red-500">{State?.Error?.perawat}</p>
           </div>
         </div>
         <div className="mb-6">
@@ -215,7 +215,7 @@ const dietaryForm: React.FC = () => {
             required
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
-            <p className="mt-2 text-sm text-red-500">{state?.Error?.ruangan}</p>
+            <p className="mt-2 text-sm text-red-500">{State?.Error?.ruangan}</p>
           </div>
         </div>
 
@@ -234,7 +234,7 @@ const dietaryForm: React.FC = () => {
             required
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
-            <p className="mt-2 text-sm text-red-500">{state?.Error?.diet}</p>
+            <p className="mt-2 text-sm text-red-500">{State?.Error?.diet}</p>
           </div>
         </div>
 
@@ -253,7 +253,7 @@ const dietaryForm: React.FC = () => {
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
             <p className="mt-2 text-sm text-red-500">
-              {state?.Error?.keterangan}
+              {State?.Error?.keterangan}
             </p>
           </div>
         </div>
@@ -263,4 +263,4 @@ const dietaryForm: React.FC = () => {
   );
 };
 
-export default dietaryForm;
+export default DietaryForm;

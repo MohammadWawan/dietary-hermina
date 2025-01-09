@@ -5,9 +5,8 @@ import type { Dietary } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 import { formatDate } from "@/lib/utils";
-const printTicket = ({ dietary }: { dietary: Dietary }) => {
-  const [birthDate, setBirthDate] = useState<string>("");
-  const [age, setAge] = useState<{ years: number; months: number } | null>(
+const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
+  const [Age, SetAge] = useState<{ years: number; months: number } | null>(
     null
   );
 
@@ -41,10 +40,10 @@ const printTicket = ({ dietary }: { dietary: Dietary }) => {
       try {
         const response = await fetch(`/api/dietary/${dietary.id}`);
         const data = await response.json();
-        setBirthDate(data.tanggal_lahir);
+
         if (data.tanggal_lahir) {
           const { years, months } = calculateAge(data.tanggal_lahir);
-          setAge({ years, months });
+          SetAge({ years, months });
         }
       } catch (error) {
         console.error("Error fetching dietary data:", error);
@@ -83,6 +82,7 @@ const printTicket = ({ dietary }: { dietary: Dietary }) => {
               <p className="text-sm text-gray-500">{dietary.keterangan}</p>
             </div>
           </div>
+
           <div className="flex justify-center text-center font-light ">
             <ReactBarcode value={dietary.mrn} className="text-xs  max-h-20 " />
           </div>
@@ -92,4 +92,4 @@ const printTicket = ({ dietary }: { dietary: Dietary }) => {
   );
 };
 
-export default printTicket;
+export default PrintTicket;

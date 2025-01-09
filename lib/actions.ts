@@ -45,23 +45,19 @@ export const SaveDietary = async (prevSate: any, formData: FormData) => {
   if (isNaN(tanggalLahir.getTime())) {
     return { message: "Tanggal lahir tidak valid" };
   }
-  try {
-    await prisma.dietary.create({
-      data: {
-        mrn: validatedFields.data.mrn,
-        nama: validatedFields.data.nama,
-        tanggal_lahir: tanggalLahir,
-        umur: validatedFields.data.umur,
-        dpjp: validatedFields.data.dpjp,
-        perawat: validatedFields.data.perawat,
-        ruangan: validatedFields.data.ruangan,
-        diet: validatedFields.data.diet,
-        keterangan: validatedFields.data.keterangan,
-      },
-    });
-  } catch (error) {
-    return { message: "Failed to create dietary" };
-  }
+  await prisma.dietary.create({
+    data: {
+      mrn: validatedFields.data.mrn,
+      nama: validatedFields.data.nama,
+      tanggal_lahir: tanggalLahir,
+      umur: validatedFields.data.umur,
+      dpjp: validatedFields.data.dpjp,
+      perawat: validatedFields.data.perawat,
+      ruangan: validatedFields.data.ruangan,
+      diet: validatedFields.data.diet,
+      keterangan: validatedFields.data.keterangan,
+    },
+  });
 
   revalidatePath("/dietary");
   redirect("/dietary");
@@ -86,24 +82,20 @@ export const updateDietary = async (
   if (isNaN(tanggalLahir.getTime())) {
     return { message: "Tanggal lahir tidak valid" };
   }
-  try {
-    await prisma.dietary.update({
-      data: {
-        mrn: validatedFields.data.mrn,
-        nama: validatedFields.data.nama,
-        tanggal_lahir: tanggalLahir,
-        umur: validatedFields.data.umur,
-        dpjp: validatedFields.data.dpjp,
-        perawat: validatedFields.data.perawat,
-        ruangan: validatedFields.data.ruangan,
-        diet: validatedFields.data.diet,
-        keterangan: validatedFields.data.keterangan,
-      },
-      where: { id },
-    });
-  } catch (error) {
-    return { message: "Failed to update dietary" };
-  }
+  await prisma.dietary.update({
+    data: {
+      mrn: validatedFields.data.mrn,
+      nama: validatedFields.data.nama,
+      tanggal_lahir: tanggalLahir,
+      umur: validatedFields.data.umur,
+      dpjp: validatedFields.data.dpjp,
+      perawat: validatedFields.data.perawat,
+      ruangan: validatedFields.data.ruangan,
+      diet: validatedFields.data.diet,
+      keterangan: validatedFields.data.keterangan,
+    },
+    where: { id },
+  });
 
   revalidatePath("/dietary");
   redirect("/dietary");
@@ -144,24 +136,20 @@ export const printDietary = async (
   if (isNaN(tanggalLahir.getTime())) {
     return { message: "Tanggal lahir tidak valid" };
   }
-  try {
-    await prisma.dietary.update({
-      data: {
-        mrn: validatedFields.data.mrn,
-        nama: validatedFields.data.nama,
-        tanggal_lahir: tanggalLahir,
-        umur: validatedFields.data.umur,
-        dpjp: validatedFields.data.dpjp,
-        perawat: validatedFields.data.perawat,
-        ruangan: validatedFields.data.ruangan,
-        diet: validatedFields.data.diet,
-        keterangan: validatedFields.data.keterangan,
-      },
-      where: { id },
-    });
-  } catch (error) {
-    return { message: "Failed to print dietary" };
-  }
+  await prisma.dietary.update({
+    data: {
+      mrn: validatedFields.data.mrn,
+      nama: validatedFields.data.nama,
+      tanggal_lahir: tanggalLahir,
+      umur: validatedFields.data.umur,
+      dpjp: validatedFields.data.dpjp,
+      perawat: validatedFields.data.perawat,
+      ruangan: validatedFields.data.ruangan,
+      diet: validatedFields.data.diet,
+      keterangan: validatedFields.data.keterangan,
+    },
+    where: { id },
+  });
 
   revalidatePath("/print");
   redirect("/print");

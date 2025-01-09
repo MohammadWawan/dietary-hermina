@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { IoCloseSharp } from "react-icons/io5";
 
-function navbar() {
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <nav className="bg-white py-5 sticky top-0 border-b justify-between px-10 border-gray-100">
@@ -75,4 +75,4 @@ function navbar() {
   );
 }
 
-export default navbar;
+export default Navbar;

@@ -5,6 +5,7 @@ import type { Dietary } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 import { formatDate } from "@/lib/utils";
+import { BackDietary } from "./button";
 const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
   const [Age, SetAge] = useState<{ years: number; months: number } | null>(
     null
@@ -56,12 +57,12 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
   return (
     <div className="container">
       <div
-        className="ticket-container bg-gray-100"
-        style={{ width: "12cm", height: "3cm" }}
+        className="ticket-container"
+        style={{ width: "10cm", height: "3cm" }}
       >
         <div className="bg-white border border-gray-300 rounded-lg shadow-md p-2">
           <div className="gap-2 justify-between grid-cols-2 p-2 mx-2 flex">
-            <div className="text-xl font-semibold truncate ">
+            <div className="text-md font-semibold truncate ">
               {dietary.nama}
               <p className="text-xs text-gray-500">
                 {formatDate(dietary.tanggal_lahir.toString())} | {dietary.umur}
@@ -83,7 +84,7 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
             </div>
           </div>
 
-          <div className="flex justify-center text-center font-light ">
+          <div className="flex justify-center text-center font-semibold ">
             <ReactBarcode value={dietary.mrn} className="text-xs  max-h-20 " />
           </div>
         </div>

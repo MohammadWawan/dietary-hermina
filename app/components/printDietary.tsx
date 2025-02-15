@@ -57,35 +57,35 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
   return (
     <div className="container">
       <div
-        className="ticket-container"
-        style={{ width: "10cm", height: "3cm" }}
+        className="ticket-container "
+        style={{ width: "12cm", height: "5cm" }}
       >
-        <div className="bg-white border border-gray-300 rounded-lg shadow-md p-2">
-          <div className="gap-2 justify-between grid-cols-2 p-2 mx-2 flex">
-            <div className="text-md font-semibold truncate ">
+        <div className="bg-white p-2 grid-flow-col grid justify-center">
+          <div className="gap-2 justify-between grid-cols-3 p-2 mx-2 flex">
+            <div className="text-sm font-semibold  ">
               {dietary.nama}
               <p className="text-xs text-gray-500">
-                {formatDate(dietary.tanggal_lahir.toString())} | {dietary.umur}
+                {formatDate(dietary.tanggal_lahir.toString())}
               </p>
+              <p className="text-xs text-gray-500">{dietary.umur}</p>
+              <p className="text-xs text-gray-500">{dietary.mrn}</p>
             </div>
-            <div className="text-xs text-gray-500">{dietary.mrn}</div>
-          </div>
-          <div className="flex justify-between px-2 mx-2">
-            <div className="text-sm font-medium">
+            <div className="text-xsfont-medium ">
               <p>{dietary.dpjp}</p> {dietary.perawat}
               <span className="text-xs text-gray-500">
                 {" "}
                 | {dietary.ruangan}{" "}
               </span>
             </div>
-            <div className="text-sm font-medium">
-              {dietary.diet}
-              <p className="text-sm text-gray-500">{dietary.keterangan}</p>
+            <div className="text-xs font-medium">
+              diet : {dietary.diet} <br />
+              <span className="text-[10px] text-gray-500">
+                {dietary.keterangan}
+              </span>
             </div>
-          </div>
-
-          <div className="flex justify-center text-center font-semibold ">
-            <ReactBarcode value={dietary.mrn} className="text-xs  max-h-20 " />
+            <div className="flex justify-end text-center font-semibold ">
+              <ReactBarcode value={dietary.mrn} className="text-xs max-h-20" />
+            </div>
           </div>
         </div>
       </div>

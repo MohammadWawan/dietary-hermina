@@ -57,7 +57,7 @@ const tableDietary = async ({
                 <tr
                   key={dietary.id}
                   className={`bg-white border-b ${
-                    isRecentlyUpdated ? "bg-red-100" : ""
+                    isRecentlyUpdated ? "bg-red-200" : ""
                   }`}
                 >
                   <td className="py-3 px-6 text-center">{dietary.mrn}</td>

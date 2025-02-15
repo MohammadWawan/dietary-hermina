@@ -1,3 +1,6 @@
+![logo](https://github.com/user-attachments/assets/aed3fad9-e6bf-446b-a217-90b1492ebfca)
+
+
 Dietary Hermina Pasuruan
 
 1. lakukan perintah git clone, untuk menduplikasi project ini 
@@ -12,6 +15,11 @@ Dietary Hermina Pasuruan
 ![image](https://github.com/user-attachments/assets/79ca21dc-27a9-4606-89c8-be394f2b1a8e)
 
 Selamat mencoba dan enjoy 🙌
+
+
+
+
+
 ![image](https://github.com/user-attachments/assets/0168364a-aa3f-4a92-8ee0-b13288515cbd)
 
 

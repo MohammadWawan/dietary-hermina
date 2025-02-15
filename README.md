@@ -12,6 +12,7 @@ Dietary Hermina Pasuruan
 5. Setup IP local pada file package.json 
 ![image](https://github.com/user-attachments/assets/a2657af8-3c6d-4ac5-a059-84dfb0dd60ae)
 6. Run program dengan perintah npm run dev pada terminal 
+
 ![image](https://github.com/user-attachments/assets/79ca21dc-27a9-4606-89c8-be394f2b1a8e)
 
 Selamat mencoba dan enjoy 🙌
@@ -20,7 +21,6 @@ Selamat mencoba dan enjoy 🙌
 
 
 
-![image](https://github.com/user-attachments/assets/0168364a-aa3f-4a92-8ee0-b13288515cbd)
 
 
 

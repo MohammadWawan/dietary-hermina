@@ -3,9 +3,10 @@
 import { ReactBarcode } from "react-jsbarcode";
 import type { Dietary } from "@prisma/client";
 import { useEffect, useState } from "react";
-
 import { formatDate } from "@/lib/utils";
 import { BackDietary } from "./button";
+import { IoPrintSharp } from "react-icons/io5";
+
 const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
   const [Age, SetAge] = useState<{ years: number; months: number } | null>(
     null
@@ -22,26 +23,25 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
 
     if (months < 0) {
       years--;
-      months += 12; // Menambahkan 12 bulan jika bulan lahir lebih besar
+      months += 12;
     }
 
     if (today.getDate() < birthDate.getDate()) {
-      months--; // Mengurangi bulan jika tanggal hari ini belum melewati tanggal lahir
+      months--;
       if (months < 0) {
         years--;
-        months += 12; // Menyesuaikan tahun jika bulan menjadi negatif
+        months += 12;
       }
     }
 
     return { years, months };
   };
-  // Fetch data based on ID to get patient's birth date
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/dietary/${dietary.id}`);
         const data = await response.json();
-
         if (data.tanggal_lahir) {
           const { years, months } = calculateAge(data.tanggal_lahir);
           SetAge({ years, months });
@@ -52,42 +52,80 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
     };
 
     fetchData();
-  }, [dietary.id]); // Run the effect when the dietary id changes
+  }, [dietary.id]);
 
   return (
-    <div className="container">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 print:bg-white">
+      {/* Tombol Navigasi & Cetak */}
+      <div className="mb-4 flex gap-2 no-print">
+        <BackDietary />
+        <button
+          onClick={() => window.print()}
+          className="inline-flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-3"
+        >
+          <IoPrintSharp />
+          Cetak
+        </button>
+      </div>
+
+      {/* Tiket Ukuran 10cm x 3cm */}
       <div
-        className="ticket-container "
-        style={{ width: "12cm", height: "5cm" }}
+        className="bg-white shadow border p-2 flex items-center justify-between"
+        style={{ width: "20cm", height: "5cm" }}
       >
-        <div className="bg-white p-2 justify-center mx-4">
-          <div className="gap-2 grid grid-cols-4">
-            <div className="text-sm font-semibold truncate">
-              <span className="text-xs">{dietary.nama}</span>
-              <p className="text-xs text-gray-500">
-                {formatDate(dietary.tanggal_lahir.toString())}
-              </p>
-              <p className="text-xs text-gray-500">{dietary.umur}</p>
-              <p className="text-xs text-gray-500">{dietary.mrn}</p>
-            </div>
-            <div className="text-xs font-medium">
-              diet : {dietary.diet} <br />
-              <span className="text-[10px] text-gray-500">
-                {dietary.keterangan}
-              </span>
-              <p className="text-[10px]">{dietary.dpjp}</p>
-              <span className="text-[10px]">{dietary.perawat}</span>
-              <span className="text-xs text-gray-500">
-                {" "}
-                | {dietary.ruangan}{" "}
-              </span>
-            </div>
-            <div className="flex justify-start mt-2 font-semibold">
-              <ReactBarcode value={dietary.mrn} className="max-h-14" />
-            </div>
+        {/* Kolom Info Pasien */}
+        <div className="flex flex-col justify-between text-[20px] w-[30%]">
+          <div>
+            <span className="font-bold text-[25px]">{dietary.nama}</span>
+          </div>
+          <div>
+            <span className="font-normal">
+              {" "}
+              {formatDate(dietary.tanggal_lahir.toString())}
+            </span>{" "}
+          </div>
+          <div>
+            <span className="font-normal">
+              {" "}
+              {Age ? `${Age.years}th ${Age.months}bl` : dietary.umur}
+            </span>{" "}
+          </div>
+          <div>
+            <span className="font-normal">{dietary.mrn}</span>
           </div>
         </div>
+
+        {/* Kolom Info Diet */}
+        <div className="flex flex-col justify-between text-[20px] w-[40%]">
+          <div>
+            <span className="font-bold">Diet: {dietary.diet}</span>
+          </div>
+          <div className="text-gray-500 whitespace-normal break-words text-[17px]">
+            {dietary.keterangan}
+          </div>
+          <div>
+            <span className="font-semibold">DPJP:</span> {dietary.dpjp}
+          </div>
+          <div>
+            <span className="font-semibold">Perawat:</span> {dietary.perawat}
+          </div>
+          <div className="text-gray-500 text-[20px]">| {dietary.ruangan}</div>
+        </div>
+
+        {/* Kolom Barcode */}
+        <div className="flex items-center justify-center w-[25%] h-full">
+          <ReactBarcode value={dietary.mrn} />
+        </div>
       </div>
+
+      {/* Gaya Cetak */}
+      <style>{`
+    @media print {
+      .no-print {
+        display: none;
+      }
+    }
+  `}</style>
     </div>
   );
 };

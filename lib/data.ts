@@ -15,7 +15,6 @@ export const getDietarys = async (query: string, currentPage: number) => {
           { diet: { contains: query, mode: "insensitive" } },
           { dpjp: { contains: query, mode: "insensitive" } },
           { perawat: { contains: query, mode: "insensitive" } },
-
           { keterangan: { contains: query, mode: "insensitive" } },
         ],
       },

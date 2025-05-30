@@ -44,6 +44,7 @@ const tableDietary = async ({
               <th className="py-3 px-6 text-center">Ruangan</th>
               <th className="py-3 px-6 text-center">Diet</th>
               <th className="py-3 px-6 text-center">Keterangan</th>
+              <th className="py-3 px-6 text-center">Status</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
@@ -73,6 +74,9 @@ const tableDietary = async ({
                   <td className="py-3 px-6 text-center">
                     {dietary.keterangan}
                   </td>
+                  <td className="py-3 px-6 text-center">
+                    {formatDate(dietary.updatedAt.toString())}
+                  </td>
                   <td className="flex justify-center gap-1 py-5">
                     <EditDietary id={dietary.id} />
                     <DeleteDietary id={dietary.id} />
@@ -84,10 +88,6 @@ const tableDietary = async ({
           </tbody>
         </table>
         <div className="flex flex-row justify-between gap-2 p-3 mt-3 ">
-          <div className="flex gap-2 justify-between">
-            <div className="bg-red-100 text-black text-center px-3 py-1 rounded border-2 border-black"></div>
-            <div>Pasien Baru / Update Data</div>
-          </div>
           <div className="">
             <span className="font-bold text-lg pr-2">Total Pasien :</span>
             <span className="text-gray-600">

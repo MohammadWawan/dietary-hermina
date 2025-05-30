@@ -146,7 +146,7 @@ const UpdateDietaryForm = ({ dietary }: { dietary: Dietary }) => {
             Tanggal Lahir
           </label>
           <input
-            type="datetime-local"
+            type="date"
             id="tanggal_lahir"
             defaultValue={
               dietary.tanggal_lahir

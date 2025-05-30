@@ -6,7 +6,13 @@ export const formatDate = (dateStr: string) => {
   });
   return formatter.format(date);
 };
-
+export const formatDateLahir = (dateStr: string) => {
+  const date = new Date(dateStr);
+  const formatter = new Intl.DateTimeFormat("id-ID", {
+    dateStyle: "medium",
+  });
+  return formatter.format(date);
+};
 export const generatePagination = (currentPage: number, totalPages: number) => {
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);

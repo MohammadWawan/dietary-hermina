@@ -4,7 +4,7 @@ import {
   getDietarys,
   getReportCountDietarys,
 } from "@/lib/data";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatDateLahir } from "@/lib/utils";
 import Pagination from "./pagination";
 
 const isUpdatedWithin24Hours = (updatedAt: string): boolean => {
@@ -64,7 +64,7 @@ const tableDietary = async ({
                   <td className="py-3 px-6 text-center">{dietary.mrn}</td>
                   <td className="py-3 px-6 text-center">{dietary.nama}</td>
                   <td className="py-3 px-6 text-center">
-                    {formatDate(dietary.tanggal_lahir.toString())}
+                    {formatDateLahir(dietary.tanggal_lahir.toString())}
                   </td>
                   <td className="py-3 px-6 text-center">{dietary.umur}</td>
                   <td className="py-3 px-6 text-center">{dietary.dpjp}</td>

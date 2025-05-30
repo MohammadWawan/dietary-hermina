@@ -55,7 +55,7 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
   }, [dietary.id]);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 print:bg-white">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 print:bg-white">
       {/* Tombol Navigasi & Cetak */}
       <div className="mb-4 flex gap-2 no-print">
         <BackDietary />
@@ -70,7 +70,7 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
 
       {/* Tiket Ukuran 20cm x 5cm */}
       <div
-        className="bg-white shadow border p-2 flex flex-col justify-between"
+        className="bg-white p-2 flex flex-col justify-between"
         style={{ width: "20cm", height: "5cm" }}
       >
         <div className="flex flex-row justify-between h-[80%]">
@@ -94,7 +94,7 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
             </div>
             <div className="font-bold">DPJP: {dietary.dpjp}</div>
             <div className="font-bold">
-              Perawat: {dietary.perawat} | {dietary.ruangan}
+              Perawat: {dietary.perawat} | {dietary.ruangan}{" "}
             </div>
           </div>
 
@@ -105,9 +105,9 @@ const PrintTicket = ({ dietary }: { dietary: Dietary }) => {
         </div>
 
         {/* Teks Imbauan */}
-        <div className="text-center text-[14px] font-semibold leading-tight mt-1">
-          Agar citarasa makanan tidak berubah, mohon segera santap selambatnya
-          30 menit setelah makan disajikan.
+        <div className="text-center text-[20px] font-extrabold leading-tight mt-1">
+          <p>Agar citarasa makanan tidak berubah, </p>
+          <p>mohon segera dimakan selambatnya 30 menit setelah disajikan.</p>
         </div>
       </div>
 
